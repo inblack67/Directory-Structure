@@ -13,7 +13,9 @@ insert into "File" ("name", "format", "size", "dimensions", "folderId") values (
 select * from "File" order by "createdAt" desc;
 
 -- c. Find the total size of a folder like total size of files contained in Folder2 which would include size of files File3.jpg and File4.txt
-select SUM("size") from "File" where "folderId" in (select id from "Folder" where "folderId" = 1);
+
+select SUM("size") from "File" where "folderId" in (select "id" from "Folder" where "folderId" = (select id from "Folder" where "name" = 'Folder2'));
+
 
 -- d. Delete a folder
 DELETE FROM "Folder" where id = 1;
